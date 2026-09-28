@@ -340,6 +340,36 @@ COMPONENT Deutorated_Disc = SANSNanodiscsFast_Loki(
     beamwidth_y = 0.01)
 WHEN(SAMPLE_HOLD==1)  AT (0, 0, 0.005) RELATIVE virtual_input
 
+COMPONENT Mixed_Disc = SANSNanodiscsFast_Loki(
+    AxisRatio=AxisRatio,
+    NumberOfLipids=N_Lipids,
+    AreaPerLipidHeadgroup=AreaPrHead,
+    HeightOfMSP=H_1MSP,
+    VolumeOfOneMSP=V_1MSP,
+    VolumeOfHeadgroup=V_1Headgruope,
+    VolumeOfCH2Tail=V_1CH2Tail,
+    VolumeOfCH3Tail=V_1CH3Tail,
+    ScatteringLengthOfOneMSP=SLD_1MSP,
+    ScatteringLengthOfHeadgroup=sigma_Head_Mixed,
+    ScatteringLengthOfCH2Tail=sigma_CH2_Mixed,
+    ScatteringLengthOfCH3Tail=sigma_CH3_Mixed,
+    Roughness=Rough,
+    Concentration=Conc,
+    RhoSolvent=RhoSolv,
+    RhoSolventIncoherent=RhoSolv_Inc,
+    AbsorptionCrosssection=AbsCrossection,
+    AbsorptionCrosssectionSolvent=sigma_abs_solvent,
+    xwidth=0.1,
+    yheight=0.1,
+    zdepth=0.005,
+    SampleToDetectorDistance=Detector_Distance,
+    DetectorRadius=DetectorRadius,
+    qMax = 10.0,
+    qMin = 0.0,
+    beamwidth_x = 0.01,
+    beamwidth_y = 0.01)
+WHEN(SAMPLE_HOLD==3)  AT (0, 0, 0.005) RELATIVE virtual_input
+
 /// Detectors //////////////////////////////////////////////////////////////////
 
 COMPONENT beamstop = Beamstop(

@@ -3,7 +3,7 @@
 # Format:    Python script code
 # McStas <http://www.mcstas.org>
 # Instrument: Nanodisc_Loki.instr (Loki)
-# Date:       Mon Sep 28 12:14:59 2026
+# Date:       Mon Sep 28 15:44:05 2026
 # File:       Nanodisc_Loki_generated.py
 
 import mcstasscript as ms
@@ -11,7 +11,7 @@ import mcstasscript as ms
 # Python McStas instrument description
 def make(input_path=None):
     instr = ms.McStas_instr("Loki_generated", author = "McCode Py-Generator", origin = "ESS DMSC", input_path=input_path)
-    
+
 # Add collected DEPENDENCY strings
     instr.set_dependency(' @MCPLFLAGS@')
 
@@ -248,7 +248,7 @@ if(Incoherent_Solvent == 2){
     # *****************************************************************************
     # * instrument 'Loki' TRACE
     # *****************************************************************************
-    
+
     # Comp instance Origin, placement and parameters
     Origin = instr.add_component('Origin','Progress_bar')
     
@@ -366,6 +366,40 @@ SAMPLE_HOLD = SAMPLE_Select;
     Deutorated_Disc.beamwidth_x = '0.01'
     Deutorated_Disc.beamwidth_y = '0.01'
     
+    # Comp instance Mixed_Disc, placement and parameters
+    Mixed_Disc = instr.add_component('Mixed_Disc','SANSNanodiscsFast_Loki', AT=['0', '0', '0.005'], AT_RELATIVE='virtual_input', ROTATED=['0.0', '0.0', '0.0'], ROTATED_RELATIVE='virtual_input')
+    # WHEN ( SAMPLE_HOLD == 3 ) at Mixed_Disc
+    Mixed_Disc.set_WHEN('( SAMPLE_HOLD == 3 )')
+
+    Mixed_Disc.NumberOfQBins = '2000'
+    Mixed_Disc.AxisRatio = 'AxisRatio'
+    Mixed_Disc.NumberOfLipids = 'N_Lipids'
+    Mixed_Disc.AreaPerLipidHeadgroup = 'AreaPrHead'
+    Mixed_Disc.HeightOfMSP = 'H_1MSP'
+    Mixed_Disc.VolumeOfOneMSP = 'V_1MSP'
+    Mixed_Disc.VolumeOfHeadgroup = 'V_1Headgruope'
+    Mixed_Disc.VolumeOfCH2Tail = 'V_1CH2Tail'
+    Mixed_Disc.VolumeOfCH3Tail = 'V_1CH3Tail'
+    Mixed_Disc.ScatteringLengthOfOneMSP = 'SLD_1MSP'
+    Mixed_Disc.ScatteringLengthOfHeadgroup = 'sigma_Head_Mixed'
+    Mixed_Disc.ScatteringLengthOfCH2Tail = 'sigma_CH2_Mixed'
+    Mixed_Disc.ScatteringLengthOfCH3Tail = 'sigma_CH3_Mixed'
+    Mixed_Disc.Roughness = 'Rough'
+    Mixed_Disc.Concentration = 'Conc'
+    Mixed_Disc.RhoSolvent = 'RhoSolv'
+    Mixed_Disc.RhoSolventIncoherent = 'RhoSolv_Inc'
+    Mixed_Disc.AbsorptionCrosssection = 'AbsCrossection'
+    Mixed_Disc.AbsorptionCrosssectionSolvent = 'sigma_abs_solvent'
+    Mixed_Disc.xwidth = '0.1'
+    Mixed_Disc.yheight = '0.1'
+    Mixed_Disc.zdepth = '0.005'
+    Mixed_Disc.SampleToDetectorDistance = 'Detector_Distance'
+    Mixed_Disc.DetectorRadius = 'DetectorRadius'
+    Mixed_Disc.qMin = '0.0'
+    Mixed_Disc.qMax = '10.0'
+    Mixed_Disc.beamwidth_x = '0.01'
+    Mixed_Disc.beamwidth_y = '0.01'
+
     # Comp instance beamstop, placement and parameters
     beamstop = instr.add_component('beamstop','Beamstop', AT=['0', '0', '1'], AT_RELATIVE='virtual_input', ROTATED=['0.0', '0.0', '0.0'], ROTATED_RELATIVE='virtual_input')
     # WHEN ( Beamstop == 1 ) at beamstop
