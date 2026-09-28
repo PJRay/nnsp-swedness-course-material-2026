@@ -1,5 +1,4 @@
-import mcstasscript as ms
-from mcstasscript.jb_interface import show
+from mcstasscript.jb_interface import SimInterface
 import code_folder.SimplePowderDiffractometer_generated as PowdDiffr
 
 def make():
@@ -7,6 +6,7 @@ def make():
     return PowdDiffr.make(input_path="code_folder")
 
 def show_widget():
-    # simple function to provide widget
     instr = PowdDiffr.make(input_path="code_folder")
-    return show(instr)
+    sim_interface = SimInterface(instr)
+    sim_interface.mpi = 4
+    return sim_interface.show_interface()

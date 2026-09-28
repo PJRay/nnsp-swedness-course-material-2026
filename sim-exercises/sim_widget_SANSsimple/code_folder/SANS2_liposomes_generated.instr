@@ -1,0 +1,172 @@
+/********************************************************************************
+* 
+* McStas, neutron ray-tracing package
+*         Copyright (C) 1997-2008, All rights reserved
+*         Risoe National Laboratory, Roskilde, Denmark
+*         Institut Laue Langevin, Grenoble, France
+* 
+* This file was written by McStasScript, which is a 
+* python based McStas instrument generator written by 
+* Mads Bertelsen in 2019 while employed at the 
+* European Spallation Source Data Management and 
+* Software Centre
+* 
+* Instrument: SANS2_liposomes_generated
+* 
+* %Identification
+* Written by: McCode Py-Generator
+* Date: 12:16:13 on September 28, 2026
+* Origin: ESS DMSC
+* %INSTRUMENT_SITE: Generated_instruments
+* 
+* !!Please write a short instrument description (1 line) here!!
+* 
+* %Description
+* Please write a longer instrument description here!
+* 
+* 
+* %Parameters
+* pinhole_rad: [unit] [m] radius of the collimating pinholes
+* LC: [unit] [m] length of the collimator - distance between pinholes
+* LD: [unit] [m] distance between the last pinhole slit and detector
+* Lambda: [unit] [AA] Average wavelength traced from source
+* DLambda: [unit] [AA] Wavelength band +/- traced from source
+* R: [unit] [AA] radius of the hard, monodisperse spheres in the sample
+* dR: [unit] [AA] Normal variance of Radius
+* dbilayer: [unit] [AA] Thickness of spherical shell, only relevant when SAMPLE==2
+* PHI: [unit] [1] Volumefraction of the hard, monodisperse spheres in the sample
+* Delta_Rho: [unit] [fm/AA^3] Volume specific scattering length density contrast of the hard, monodisperse spheres in the sample as compared to the solution
+* Qmax: [unit] [AA^-1] Maximum scattering vector allowed by geometry to hit the detector area
+* BEAMSTOP: [unit] [0/1] If set, the beamstop is inserted in front of the detector in order to block the transmitted beam
+* SAMPLE: [unit] [0/1/2] When SAMPLE==0, no sample is used, SAMPLE==1 sample is composed of hard spheres, if SAMPLE==2 sample is composed of spherical shells.
+* Sigma_a: [unit] [barn] Absorption crossection of the sample
+* 
+* %Link 
+* 
+* %End 
+********************************************************************************/
+
+DEFINE INSTRUMENT SANS2_liposomes_generated (
+double pinhole_rad = 0.004, // [m] radius of the collimating pinholes
+double LC = 3, // [m] length of the collimator - distance between pinholes
+double LD = 3, // [m] distance between the last pinhole slit and detector
+double Lambda = 6, // [AA] Average wavelength traced from source
+double DLambda = 0.6, // [AA] Wavelength band +/- traced from source
+double R = 400, // [AA] radius of the hard, monodisperse spheres in the sample
+double dR = 0, // [AA] Normal variance of Radius
+double dbilayer = 35, // [AA] Thickness of spherical shell, only relevant when SAMPLE==2
+double PHI = 0.01, // [1] Volumefraction of the hard, monodisperse spheres in the sample
+double Delta_Rho = 0.6, // [fm/AA^3] Volume specific scattering length density contrast of the hard, monodisperse spheres in the sample as compared to the solution
+double Qmax = 0.3, // [AA^-1] Maximum scattering vector allowed by geometry to hit the detector area
+double BEAMSTOP = 1, // [0/1] If set, the beamstop is inserted in front of the detector in order to block the transmitted beam
+double SAMPLE = 1, // [0/1/2] When SAMPLE==0, no sample is used, SAMPLE==1 sample is composed of hard spheres, if SAMPLE==2 sample is composed of spherical shells.
+double Sigma_a = 0 // [barn] Absorption crossection of the sample
+)
+
+DECLARE 
+%{
+
+double nm=1e-9;
+double Rdet;
+    
+%}
+
+INITIALIZE 
+%{
+// Start of initialize for generated SANS2_liposomes_generated
+
+  Rdet=0.5; // Radius of detector, also used for focusing sample
+    
+%}
+
+TRACE 
+COMPONENT Origin = Progress_bar(
+ profile = "NULL", percent = 10,
+ flag_save = 0, minutes = 0)
+AT (0, 0, 0) ABSOLUTE
+
+COMPONENT source = Source_Maxwell_3(
+ size = 2 * pinhole_rad, yheight = 0,
+ xwidth = 0, Lmin = Lambda - DLambda,
+ Lmax = Lambda + DLambda, dist = LC,
+ focus_xw = pinhole_rad, focus_yh = pinhole_rad,
+ T1 = 150.42, T2 = 38.74,
+ T3 = 14.84, I1 = 3.67e11,
+ I2 = 3.64e11, I3 = 0.95e11,
+ target_index = 1, lambda0 = 0,
+ dlambda = 0)
+AT (0, 0, 0) RELATIVE Origin
+ROTATED (0.0, 0.0, 0.0) RELATIVE Origin
+
+COMPONENT ArmSlit1 = Arm()
+AT (0, 0, 6 - LC + 0.001) RELATIVE source
+ROTATED (0.0, 0.0, 0.0) RELATIVE source
+
+COMPONENT CircSlit1 = Slit(
+ xmin = UNSET, xmax = UNSET,
+ ymin = UNSET, ymax = UNSET,
+ radius = pinhole_rad, xwidth = UNSET,
+ yheight = UNSET)
+AT (0, 0, 0) RELATIVE ArmSlit1
+ROTATED (0.0, 0.0, 0.0) RELATIVE ArmSlit1
+
+COMPONENT ArmSlit2 = Arm()
+AT (0, 0, 6) RELATIVE source
+ROTATED (0.0, 0.0, 0.0) RELATIVE source
+
+COMPONENT CircSlit2 = Slit(
+ xmin = UNSET, xmax = UNSET,
+ ymin = UNSET, ymax = UNSET,
+ radius = pinhole_rad, xwidth = UNSET,
+ yheight = UNSET)
+AT (0, 0, 0) RELATIVE ArmSlit2
+ROTATED (0.0, 0.0, 0.0) RELATIVE ArmSlit2
+
+COMPONENT SampleArm = Arm()
+AT (0, 0, 0.05) RELATIVE ArmSlit2
+ROTATED (0.0, 0.0, 0.0) RELATIVE ArmSlit2
+
+SPLIT 10 COMPONENT sampleB = Sans_liposomes_new(
+ R = R, dR = dR,
+ Phi = PHI, Delta_rho = Delta_Rho,
+ sigma_a = 0.5, dist = LD,
+ Rdet = Rdet, xwidth = 4 * pinhole_rad,
+ yheight = 4 * pinhole_rad, zthick = 0.005,
+ qmax = Qmax, dbilayer = 35)
+WHEN (( SAMPLE == 1 ))
+AT (0, 0, 0) RELATIVE SampleArm
+ROTATED (0.0, 0.0, 0.0) RELATIVE SampleArm
+
+COMPONENT beamstop = Beamstop(
+ xmin = -0.05, xmax = 0.05,
+ ymin = -0.05, ymax = 0.05,
+ xwidth = 0, yheight = 0,
+ radius = 3 * pinhole_rad)
+WHEN (( BEAMSTOP ))
+AT (0, 0, LD -0.01) RELATIVE ArmSlit2
+ROTATED (0.0, 0.0, 0.0) RELATIVE ArmSlit2
+
+COMPONENT PSD = PSD_monitor(
+ nx = 128, ny = 128,
+ filename = "PSD.txt", xmin = -0.05,
+ xmax = 0.05, ymin = -0.05,
+ ymax = 0.05, xwidth = 1,
+ yheight = 1, restore_neutron = 1,
+ nowritefile = 0)
+AT (0, 0, LD -0.001) RELATIVE ArmSlit2
+ROTATED (0.0, 0.0, 0.0) RELATIVE ArmSlit2
+
+COMPONENT q_monitor = SANSQMonitor(
+ NumberOfBins = 100, RFilename = "rdetector",
+ qFilename = "qdetector", RadiusDetector = Rdet,
+ DistanceFromSample = LD, LambdaMin = Lambda - DLambda,
+ Lambda0 = 0.0, restore_neutron = 1)
+AT (0, 0, LD + 0.001) RELATIVE ArmSlit2
+ROTATED (0.0, 0.0, 0.0) RELATIVE ArmSlit2
+
+FINALLY 
+%{
+// Start of finally for generated SANS2_liposomes_generated
+%}
+
+END
