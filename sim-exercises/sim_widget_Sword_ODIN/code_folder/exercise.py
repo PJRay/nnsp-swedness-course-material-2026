@@ -6,8 +6,11 @@ def make():
     return sword.make(input_path="code_folder")
 
 
-def show_widget():
-    instr = sword.make(input_path="code_folder")
-    sim_interface = SimInterface(instr)
+def make_widget_interface():
+    sim_interface = SimInterface(make())
     sim_interface.mpi = 4
-    return sim_interface.show_interface()
+    return sim_interface
+
+
+def show_widget():
+    return make_widget_interface().show_interface()

@@ -137,8 +137,8 @@ TRACE
     PROP_Z0;
 
     radpos = sqrt(x*x+y*y);
+    i = floor((t-tt_0)*nt/(tt_1-tt_0));                /* Bin number */
     if(radpos > rmin && radpos < rmax && i>=0 && i < nt){
-      i = floor((t-tt_0)*nt/(tt_1-tt_0));              /* Bin number */
 
 
       // Normalization by detector area of the r_bin the neutron hit.
@@ -151,10 +151,10 @@ TRACE
       q = 4.0 * PI * sin(atan(RAD[j]/SDD)/2.0)/Lamda[i];
 
       k = floor(nq*q/Qmax);
-      p1 = p1 * I / Calibration[k];
-      p2 = p1*p1;
-      if (q < Qmax && i>=0 && i < nt)
+      if (q >= 0 && q < Qmax && k >= 0 && k < nq)
       {
+        p1 = p1 * I / Calibration[k];
+        p2 = p1*p1;
         #pragma acc atomic
         Iq_Ncount[k] = Iq_Ncount[k] + 1;
         #pragma acc atomic

@@ -77,7 +77,7 @@ DECLARE
       // determine segment upper limit
       high = u[i];
       if (low<=x && x<=high) {
-        fprintf(stdout, "\nl:%1f h:%1f s:%1f c:%1f x:%1f", low, high, s[i], c[i], x);
+        fprintf(stderr, "\nl:%1f h:%1f s:%1f c:%1f x:%1f", low, high, s[i], c[i], x);
         *val = s[i]*x + c[i];
         return s[i]*x + c[i];
         //return 0;
