@@ -15,3 +15,5 @@ git sparse-checkout set sim-exercises/SimplePowderDiffractometer
 git checkout master
 cd sim-exercises/SimplePowderDiffractometer
 ```
+
+From there, you can now run the Jupyter Notebook (the `.ipynb` file) on the VISA JupyterLab front-end.
