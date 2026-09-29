@@ -1,4 +1,4 @@
-# NNSP-Sweness course material 2026
+# NNSP-Swedness course material 2026
 Course materials for the NNSP-Swedness neutron scattering school held in Lund in September-October 2026.
 
 This repository will mostly hold the simulation exercise materials, that will be used during the e-learning segments of the course. 
@@ -9,8 +9,8 @@ For example, to use the simple powder diffractometer in a folder called `workdir
 cd
 mkdir -p workdir
 cd workdir
-git clone --no-checkout https://github.com/PJRay/nnsp-sweness-course-material-2026.git
-cd nnsp-sweness-course-material-2026
+git clone --no-checkout https://github.com/PJRay/nnsp-swedness-course-material-2026.git
+cd nnsp-swedness-course-material-2026
 git sparse-checkout set sim_widgets/sim_widget_SimplePowderDiffractometer
 git checkout master
 cd sim_widgets/sim_widget_SimplePowderDiffractometer
@@ -23,7 +23,7 @@ If you want to fetch further exercises after that, simply run (here with the ref
 
 ```bash
 cd
-cd workdir/nnsp-sweness-course-material-2026
+cd workdir/nnsp-swedness-course-material-2026
 git sparse-checkout add sim_widgets/sim_widget_reflectometer
 cd sim_widgets/sim_widget_reflectometer
 ```
