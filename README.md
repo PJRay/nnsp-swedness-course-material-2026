@@ -17,3 +17,15 @@ cd sim_widgets/sim_widget_SimplePowderDiffractometer
 ```
 
 From there, you can now run the Jupyter Notebook (the `.ipynb` file) on the VISA JupyterLab front-end.
+
+
+If you want to fetch further exercises after that, simply run (here with the reflectometer instrument as an example):
+
+```bash
+cd
+cd workdir/nnsp-sweness-course-material-2026
+git sparse-checkout add sim_widgets/sim_widget_reflectometer
+cd sim_widgets/sim_widget_reflectometer
+```
+
+Note the `add` instead of `set` option, which makes sure that local simulation widgets folders aren't removed in the process of adding another. 
