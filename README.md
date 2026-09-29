@@ -11,9 +11,9 @@ mkdir -p workdir
 cd workdir
 git clone --no-checkout https://github.com/PJRay/nnsp-sweness-course-material-2026.git
 cd nnsp-sweness-course-material-2026
-git sparse-checkout set sim-exercises/SimplePowderDiffractometer
+git sparse-checkout set sim-exercises/sim_widget_SimplePowderDiffractometer
 git checkout master
-cd sim-exercises/SimplePowderDiffractometer
+cd sim-exercises/sim_widget_SimplePowderDiffractometer
 ```
 
 From there, you can now run the Jupyter Notebook (the `.ipynb` file) on the VISA JupyterLab front-end.
