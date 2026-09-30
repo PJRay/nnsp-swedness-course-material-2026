@@ -30,8 +30,8 @@ def make(input_path=None):
     lambda0 = instr.add_parameter('double', 'lambda0', value=1, comment='[AA]  The mean value of  incoming wavelegths (Gaussian distribution)')
     dlambda = instr.add_parameter('double', 'dlambda', value=0.005, comment='[AA] Gaussian sigma of incoming wavelength distribution')
     coll = instr.add_parameter('double', 'coll', value=120, comment='[arcmin] horizontal collimation')
-    container = instr.add_parameter('int', 'container', value=0, comment='[1] When >0 a 2mm thick Al pressed powder can is inserted around the sample')
-    sample = instr.add_parameter('int', 'sample', value=0, options=[0,1,2,3], comment='[1] 0=Ni, 1=Fe, 2=SiO2, 3=C_diamond, otherwise empty')
+    container = instr.add_parameter('int', 'container', value=0, comment='[CURRENYLY BROKEN: DO NOT CHANGE] [1] When >0 a 2mm thick Al pressed powder can is inserted around the sample')
+    sample = instr.add_parameter('int', 'sample', value=0, options=[0,1,2,3], comment='[CURRENYLY BROKEN: DO NOT CHANGE] [1] 0=Ni, 1=Fe, 2=SiO2, 3=C_diamond, otherwise empty')
 
     component_definition_metadata = {
     }

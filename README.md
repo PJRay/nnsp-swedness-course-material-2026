@@ -1,4 +1,31 @@
-# NNSP-Sweness course material 2026
+# NNSP-Swedness course material 2026
 Course materials for the NNSP-Swedness neutron scattering school held in Lund in September-October 2026.
 
-This repository will mostly hold the simulation exercise materials, that will be used during the e-learning segments of the course.
+This repository will mostly hold the simulation exercise materials, that will be used during the e-learning segments of the course. 
+The students will be told to run specific `git clone` commands to fetch folders with content to their VISA instances during the exercises. 
+For example, to use the simple powder diffractometer in a folder called `workdir`, run the following commands: 
+
+```bash
+cd
+mkdir -p workdir
+cd workdir
+git clone --no-checkout https://github.com/PJRay/nnsp-swedness-course-material-2026.git
+cd nnsp-swedness-course-material-2026
+git sparse-checkout set sim_widgets/sim_widget_SimplePowderDiffractometer
+git checkout master
+cd sim_widgets/sim_widget_SimplePowderDiffractometer
+```
+
+From there, you can now run the Jupyter Notebook (the `.ipynb` file) on the VISA JupyterLab front-end.
+
+
+If you want to fetch further exercises after that, simply run (here with the reflectometer instrument as an example):
+
+```bash
+cd
+cd workdir/nnsp-swedness-course-material-2026
+git sparse-checkout add sim_widgets/sim_widget_reflectometer
+cd sim_widgets/sim_widget_reflectometer
+```
+
+Note the `add` instead of `set` option, which makes sure that local simulation widgets folders aren't removed in the process of adding another. 
