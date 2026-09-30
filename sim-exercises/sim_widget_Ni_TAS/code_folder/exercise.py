@@ -1,16 +1,9 @@
 import copy
-import sys
-from pathlib import Path
 
 from mcstasscript.jb_interface import SimInterface
 import code_folder.Ni_TAS_generated as ni_tas
 
-
-notebook_version = Path(__file__).resolve().parents[4] / "notebook_version"
-if str(notebook_version) not in sys.path:
-    sys.path.insert(0, str(notebook_version))
-
-from scan import ParameterScan as Scan
+from .scan import ParameterScan as Scan
 
 
 def make():
