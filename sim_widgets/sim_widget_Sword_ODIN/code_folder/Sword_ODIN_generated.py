@@ -27,16 +27,16 @@ def make(input_path=None):
 
     # Instrument parameters:
 
-    chopper_mode = instr.add_parameter('double', 'chopper_mode', value=5, options=[0,1,2,3,4,5], comment='[0] Chose between 6 different chopper modes from 0 to 5. Chooper mode 5 is a white beam.')
-    Lambda = instr.add_parameter('double', 'Lambda', value=0, comment='[AA] Choose a specific wavelength, between 1AA and 10AA, that you want to use in the simulation. The wavelength must be pressent in the choosen chopper mode. Lambda=0 means taht all wavelegnth in the chopper mode are used.')
-    Sample = instr.add_parameter('double', 'Sample', value=1, options=[0,1], comment='[0] choose if the sample is pressen in the simulation or not, Sample=0 means that the sample is not in the beam, Sample=1 means that the sample is in the beam.')
-    pinhole_diameter = instr.add_parameter('double', 'pinhole_diameter', value=0.1, comment='[m] (0.01m and 0.1m) between  sets the diameter of the pinhole.')
+    chopper_mode = instr.add_parameter('double', 'chopper_mode', value=5, options=[0,1,2,3,4,5], comment='[-] Chose between 6 different chopper modes from 0 to 5. Chopper mode 5 is a white beam.')
+    Lambda = instr.add_parameter('double', 'Lambda', value=0, comment='[AA] Choose a specific wavelength, between 1AA and 10AA, that you want to use in the simulation. The wavelength must be present in the chosen chopper mode. Lambda=0 means that all wavelength in the chopper mode are used.')
+    Sample = instr.add_parameter('double', 'Sample', value=1, options=[0,1], comment='[-] choose if the sample is present in the simulation or not, Sample=0 means that the sample is not in the beam, Sample=1 means that the sample is in the beam.')
+    pinhole_diameter = instr.add_parameter('double', 'pinhole_diameter', value=0.1, comment='[m] (between 0.01m and 0.1m) sets the diameter of the pinhole.')
     pinhole_detector_distance = instr.add_parameter('double', 'pinhole_detector_distance', value=10.0, comment='[m] (between 10m and 25m) sets the distance between the pinhole and the detector.')
     pinhole_sample_distance = instr.add_parameter('double', 'pinhole_sample_distance', value=9, comment='[m] (between 1m and 25m) set the distance between the pinhole and the sample.')
-    X_sample_pos = instr.add_parameter('double', 'X_sample_pos', value=0.0, comment='[m] translat the sample in the x dirrection.')
-    Y_sample_pos = instr.add_parameter('double', 'Y_sample_pos', value=0.0, comment='[m] translat the sample in the y dirrection.')
+    X_sample_pos = instr.add_parameter('double', 'X_sample_pos', value=0.0, comment='[m] translate the sample in the x direction.')
+    Y_sample_pos = instr.add_parameter('double', 'Y_sample_pos', value=0.0, comment='[m] translate the sample in the y direction.')
     angle = instr.add_parameter('double', 'angle', value=0, comment='[deg] rotate the sample around the y axis.')
-    Zoom = instr.add_parameter('double', 'Zoom', value=1, options=[1,2,3,4,5,6,7,8,9,10], comment='[0] (between 1 and 10) Decrease the detector area avalable but increase the resolution of the detector by the same fact.')
+    Zoom = instr.add_parameter('double', 'Zoom', value=1, options=[1,2,3,4,5,6,7,8,9,10], comment='[-] (between 1 and 10) decreases the detector area available, but increase the resolution of the detector by the same fact.')
 
     component_definition_metadata = {
     }
